@@ -21,6 +21,7 @@ zlabel(ax,'z')
 xlim(ax,[-4,4]);
 ylim(ax,[-4,4]);
 zlim(ax,[-4,4]);
+grid(ax,'on');
 
 %% Compute eigenvalues
 [V,D] = eig(I);
@@ -28,4 +29,7 @@ zlim(ax,[-4,4]);
 %% Plot the eigenvectors
 arrow3(zeros(3,3), V'*4, 'b-1.5', 1.5 )
 
+%% Decompose I to be diagonal
+% (Basically this is showing, by similarity transform, we can recover IG)
+V'*I*V
 
