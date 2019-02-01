@@ -1,4 +1,13 @@
+# Ignore
+
+## Julia
 *.jl.cov
 *.jl.*.cov
 *.jl.mem
 deps/deps.jl
+
+## Matlab
+*.mat
+*~
+*.asv
+
