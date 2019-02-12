@@ -1,0 +1,4 @@
+# Ignore 
+slprj/
+*.slx.autosave
+*.slxc
