@@ -11,3 +11,5 @@ deps/deps.jl
 *~
 *.asv
 
+## Jupyter
+.ipynb_checkpoints/
