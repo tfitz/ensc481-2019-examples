@@ -27,8 +27,8 @@ torque = @(t,z) 0;
 
 % feedback
 K = design_controller(m, g, l, M, J_G);
-f = @(t,z) -K(1,:)*z;
-torque = @(t,z) -K(2,:)*z;
+% f = @(t,z) -K(1,:)*z;
+% torque = @(t,z) -K(2,:)*z;
 
 
 %% Solve the system
