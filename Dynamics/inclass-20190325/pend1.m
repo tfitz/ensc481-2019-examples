@@ -140,11 +140,33 @@ hold(ax, 'on');
 ax.DataAspectRatio = [1,1,1];
 xlabel(ax, 'x');
 ylabel(ax, 'y');
+xlim(ax, [-2.5,2.5]);
+ylim(ax, [-3,1]);
 
 % plot the origin
 h_base = patch(ax, 'XData', 0.2*[-1,1,1,-1], 'YData', 0.1*[-1,-1,1,1]  );
 
-%
+% draw a circle
+beta = linspace(0,2*pi,100);
+h_circle = plot(ax, l*cos(beta), l*sin(beta), ...
+    ':', 'color', [1,1,1]*0.3, 'LineWidth', 3 );
+
+
+% draw the pendulum
+h_pendulum = line(ax, 'XData', [0, z0(1)] , 'YData', [0,z0(2)],...
+    'LineWidth', 3, 'color', 'm');
+
+nframes = 300;
+time = linspace(0,tf,nframes);
+for i = 1:nframes
+    z = deval(sol, time(i), 1:2);
+    h_pendulum.XData = [0,z(1)];
+    h_pendulum.YData = [0,z(2)];
+    
+    pause(0.1)
+    
+end
+
 
 %% State-space function to solve
 % this was derived in the jupyter notebook using Lagrange's equation
