@@ -1,6 +1,6 @@
 %% Linear Multi-step methods
 % 3-Apr: Adams-Bashforth 2
-%
+% 5-Apr: add Trapezoidal Rule
 
 
 %%
@@ -12,7 +12,7 @@ clc
 % The most interesting part to vary here is ratio of wn and stepsize h.
 wn = 1;
 zeta = 0.1;
-h = 0.2;
+h = 0.4;
 
 %%
 % The equation to solve is
@@ -49,8 +49,30 @@ for i = 2:nstep-1
     Z(:,i+1) = Z(:,i) + h*( 3/2*fi - 1/2*fm1 );
     
     fm1 = fi;
+    
 end
 
+%% AM2/Trap
+Z_am2 = zeros(size(Z));
+Z_am2(:,1) = z0;
+tol = 1e-6;
+for i = 1:nstep-1
+    
+    iter = 0;
+    err = 1;
+    zest = Z_am2(:,i);
+    while err >= tol
+        iter = iter + 1;
+        zest1 = Z_am2(:,i) + h/2*( f(zest) + f(Z_am2(:,i)) );
+    
+        err = norm(zest1 - zest);
+        zest = zest1;
+        
+    end
+    Z_am2(:,i+1) = zest;
+    iter
+    
+end
 
 %% Visualize the results 
 % Now we can make a plot to compare the true solution and our
@@ -65,3 +87,20 @@ ylabel('x(t)')
 legend('show')
 
 
+plot( time, Z_am2(1,:),'*', 'DisplayName', 'AM2', 'LineWidth', 3)
+
+
+%%
+% Convergence testing example
+% z1 = [-0.328569181097212;
+%    0.197477255580434];
+% z2 = [-0.334745911140231;
+%    0.188330026330040];
+% z3 = [-0.336317094322793;
+%    0.186084168432383];
+% 
+% z1(1) - z2(1)
+% z2(1) - z3(1)
+
+
+%%
