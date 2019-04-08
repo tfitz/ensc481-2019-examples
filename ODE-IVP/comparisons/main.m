@@ -37,6 +37,7 @@ Z = zeros( 2, nstep);
 
 %% Integrate the solution
 % Let's first take an Euler step since AB2 is not self-starting
+tic
 Z(:,1) = z0;
 Z(:,2) = Z(:,1) + h*f(z0);
 
@@ -51,16 +52,22 @@ for i = 2:nstep-1
     fm1 = fi;
     
 end
+toc
 
 %% AM2/Trap
 Z_am2 = zeros(size(Z));
 Z_am2(:,1) = z0;
 tol = 1e-6;
+tic
 for i = 1:nstep-1
     
     iter = 0;
     err = 1;
-    zest = Z_am2(:,i);
+    if i == 1
+        zest = Z_am2(:,i) + h*f(Z_am2(:,i));
+    else
+        zest = Z_am2(:,i) + h*(3/2*f(Z_am2(:,i)) - 1/2*f(Z_am2(:,i-1)) );
+    end
     while err >= tol
         iter = iter + 1;
         zest1 = Z_am2(:,i) + h/2*( f(zest) + f(Z_am2(:,i)) );
@@ -73,6 +80,7 @@ for i = 1:nstep-1
     iter
     
 end
+toc
 
 %% Visualize the results 
 % Now we can make a plot to compare the true solution and our
