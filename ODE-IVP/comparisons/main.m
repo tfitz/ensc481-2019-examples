@@ -111,4 +111,21 @@ plot( time, Z_am2(1,:),'*', 'DisplayName', 'AM2', 'LineWidth', 3)
 % z2(1) - z3(1)
 
 
-%%
+%% RK2 test
+f = @(t,z) [z(2); -wn^2*z(1)-2*zeta*wn*z(2)];
+
+tic
+[Z_rk2,t] = rk2(f, 0, h, tf, z0);
+toc
+
+plot( t, Z_rk2(1,:), 's','LineWidth', 3, 'DisplayName', 'RK2' )
+
+
+%% RK2 with adaptive time stepping
+tol = 0.1;
+
+tic
+[Z_rk2a,t] = rk2_adapt(f, 0, h, tf, z0, tol);
+toc
+
+plot( t, Z_rk2a(1,:), 'd','LineWidth', 3, 'DisplayName', 'RK2 adaptive stepping' )
