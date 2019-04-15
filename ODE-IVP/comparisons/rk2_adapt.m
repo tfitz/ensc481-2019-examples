@@ -1,4 +1,4 @@
-function [x,t] = rk2_adapt(f, ti, h0, tf, x0, tol)
+function [x,t, fail_count] = rk2_adapt(f, ti, h0, tf, x0, tol)
 
 %% TODO
 % - include minimum h check
@@ -28,7 +28,7 @@ x(:,1) = x0;
 max_num_steps = 3000;
 h = h0;
 j = 1;
-
+fail_count = 0;
 
 %% Integrate
 %
@@ -39,6 +39,7 @@ for i = 1:max_num_steps
     
     if err >= tol
         h = h/2;
+        fail_count = fail_count + 1;
     else
         j = j+1;
         x(:,j) = z;

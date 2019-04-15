@@ -1,4 +1,4 @@
-function [z,err] = rk2_step(f, tn, xn, h)
+function [z,y] = rk2_step2(f, tn, xn, h)
 
 alpha = 2/3;
 
@@ -16,4 +16,3 @@ z = xn + h*(b1*k1 + b2*k2);
 % Euler: lower order est
 y = xn + h*k1;
 
-err = norm(z-y);
