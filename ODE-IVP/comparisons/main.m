@@ -1,7 +1,7 @@
 %% Linear Multi-step methods
 % 3-Apr: Adams-Bashforth 2
 % 5-Apr: add Trapezoidal Rule
-
+% 17-Apr: added IRK
 
 %%
 clear all
@@ -129,3 +129,13 @@ tic
 toc
 
 plot( t, Z_rk2a(1,:), 'd','LineWidth', 3, 'DisplayName', 'RK2 adaptive stepping' )
+
+
+
+%% irk test
+tic
+[Z_irk,t] = irk(f, 0, h, tf, z0);
+toc
+
+plot( t, Z_irk(1,:), '^','LineWidth', 3, 'DisplayName', 'irk' )
+

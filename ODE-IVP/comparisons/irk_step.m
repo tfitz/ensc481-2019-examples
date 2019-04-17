@@ -1,4 +1,4 @@
-function y = irk_step(f, tn, xn, h)
+function [y,flag] = irk_step(f, tn, xn, h)
 
 
 

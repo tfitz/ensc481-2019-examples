@@ -1,7 +1,5 @@
-%% Linear Multi-step methods
-% 3-Apr: Adams-Bashforth 2
-% 5-Apr: add Trapezoidal Rule
-
+%% RK Adapt. Comparisons
+% 
 
 %%
 clear all
